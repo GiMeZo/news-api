@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Resources\UsersResource;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,3 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('authors', 'Api\UserController@index');
+Route::get('author/{id}', 'Api\UserController@show');
+Route::get('posts/author/{id}', 'Api\UserController@GetAuthorPosts');
+Route::get('comments/author/{id}', 'Api\UserController@GetAuthorComments');

@@ -23,3 +23,9 @@ Route::get('authors', 'Api\UserController@index');
 Route::get('author/{id}', 'Api\UserController@show');
 Route::get('posts/author/{id}', 'Api\UserController@GetAuthorPosts');
 Route::get('comments/author/{id}', 'Api\UserController@GetAuthorComments');
+
+Route::get('categories', 'Api\CategoryController@index');
+Route::get('posts/categories/{id}', 'Api\CategoryController@GetCategoryPosts');
+Route::get('posts', 'Api\PostController@index');
+Route::get('post/{id}', 'Api\PostController@show');
+Route::get('comments/post/{id}', 'Api\PostController@GetPostComments');

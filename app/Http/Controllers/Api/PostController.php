@@ -47,6 +47,18 @@ class PostController extends Controller
         $post->votes_up = 0;
         $post->votes_down = 0;
 
+        if($request->hasFile('featured_image')) {
+            $featured_image = $request->file('featured_image');
+            $filename = time().$featured_image->getClientOriginalName();
+            $path = url('/') . '/public/images/' . $filename;
+            Storage::disk('public/images/')->putFileAs(
+                $path,
+                $featured_image,
+                $filename
+            );
+            $post->featured_image = $path;
+        }
+
         $post->save();
 
         return new PostResource($post);

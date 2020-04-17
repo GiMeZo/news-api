@@ -11,9 +11,16 @@ class Post extends Model
         'votes_down', 'user_id', 'category_id'
     ];
 
-    public function category()
-    {
-        return $this->belongsTo(category::class, 'category_id');
+    public function author() {
+        return $this->belongTo(User::class);
+    }
+
+    public function comments() {
+        return $this->hasMany(comment::class);
+    }
+
+    public function category() {
+        return $this->belongTo(category::class);
     }
     
 }

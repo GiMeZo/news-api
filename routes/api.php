@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 
 Route::get('authors', 'Api\UserController@index');
 Route::get('author/{id}', 'Api\UserController@show');
@@ -31,3 +29,8 @@ Route::get('comments/post/{id}', 'Api\PostController@GetPostComments');
 
 Route::post('register','Api\UserController@store');
 Route::post('token','Api\UserController@getToken');
+
+Route::middleware('auth:api')->group(function () {
+    Route::put('update-user/{id}', 'Api\UserController@update');
+    Route::post('posts', 'Api\PostController@store');
+});

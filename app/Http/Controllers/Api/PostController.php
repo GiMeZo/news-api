@@ -22,15 +22,34 @@ class PostController extends Controller
         return new PostsResource($posts);
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * store
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return new PostResource
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'category_id' => 'required'
+        ]);
+        
+        $user = $request->user();
+
+        $post = new Post();
+        $post->title = $request->get('title');
+        $post->content = $request->get('content');
+        $post->category_id = $request->get('category_id');
+        $post->user_id = $user->id;
+        $post->votes_up = 0;
+        $post->votes_down = 0;
+
+        $post->save();
+
+        return new PostResource($post);
     }
 
     public function show($id)
@@ -62,6 +81,12 @@ class PostController extends Controller
         //
     }
 
+    /**
+     * GetPostComments
+     *
+     * @param mixed $id
+     * @return new \App\Http\Resources\CommentsResource
+     */
     public function GetPostComments($id)
     {
         $post = Post::find($id);

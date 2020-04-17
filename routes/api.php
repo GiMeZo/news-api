@@ -28,3 +28,6 @@ Route::get('posts/categories/{id}', 'Api\CategoryController@GetCategoryPosts');
 Route::get('posts', 'Api\PostController@index');
 Route::get('post/{id}', 'Api\PostController@show');
 Route::get('comments/post/{id}', 'Api\PostController@GetPostComments');
+
+Route::post('register','Api\UserController@store');
+Route::post('token','Api\UserController@getToken');

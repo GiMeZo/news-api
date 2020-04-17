@@ -10,4 +10,10 @@ class Post extends Model
         'title', 'content', 'featured_image', 'votes_up',
         'votes_down', 'user_id', 'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(category::class, 'category_id');
+    }
+    
 }
